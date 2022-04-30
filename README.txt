@@ -43,5 +43,5 @@ REQUIRED LIBRARIES FOR COMPILATION
 
 
 
-Libraries can also be compiled using the "-L/libpath" flag to point to a folder that contains the libraries
+Libraries can also be linked using the "-L/libpath" flag to point to a folder that contains the libraries
 -------------------------------------------------------------------------------------
