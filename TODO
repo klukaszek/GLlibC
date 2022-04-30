@@ -2,6 +2,8 @@ GET DYNAMIC LINKING TO WORK AT RUNTIME (WORKS AT COMPILE TIME)
 
 GLinput polling implementation
 
-GLwindow CONTROLLER SUPPORT
+GLinput CONTROLLER SUPPORT
 
 GLwindow abstraction
+
+Look into CIMGUI https://github.com/cimgui/cimgui and the example https://github.com/peko/cimgui-c-example/blob/master/src/main.c

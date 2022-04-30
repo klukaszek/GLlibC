@@ -24,7 +24,4 @@ void set_refresh_rate(GLFWwindow *window, int16_t refresh_rate);
 bool is_fullscreen(GLFWwindow *window);
 
 // toggles fullscreen on GLFWwindow pointer
-void toggle_fullscreen_on(GLFWwindow *window);
-
-// toggles fullscreen off GLFWwindow pointer
-void toggle_fullscreen_off(GLFWwindow *window);
+void toggle_fullscreen(GLFWwindow *window);

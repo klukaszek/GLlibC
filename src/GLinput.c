@@ -6,14 +6,14 @@
 // simple key_pressed callback for glfwSetKeyCallback(window, callback);
 void key_pressed_callback(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
+    //Toggle Fullscreen with F3
     if (key == GLFW_KEY_F3 && action == GLFW_PRESS)
     {
-        if
-            (is_fullscreen(window)) toggle_fullscreen_off(window);
-        else 
-            toggle_fullscreen_on(window);
-
-        log_info("Fullscreen toggled.");
+        toggle_fullscreen(window);
+    }
+    else if (action == GLFW_PRESS || action == GLFW_REPEAT)
+    {
+        log_trace("Key Pressed: %c", key);
     }
 }
 
@@ -65,5 +65,5 @@ void mouse_callback(GLFWwindow *window, int button, int action, int mods)
 // simple scroll callback for glfwSetScrollCallback(window, callback);
 void scroll_callback(GLFWwindow *window, double xoffset, double yoffset)
 {
-    printf("xOffset: %.1f, yOffset: %.1f\n", xoffset, yoffset);
+    log_trace("xOffset: %.1f, yOffset: %.1f\n", xoffset, yoffset);
 }
