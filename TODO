@@ -1,11 +1,11 @@
 GET DYNAMIC LINKING TO WORK AT RUNTIME (WORKS AT COMPILE TIME)
 
-GLinput polling implementation
-
-GLinput CONTROLLER SUPPORT
+GLinput polling implementation (CURRENTLY WORKING ON)
+    try to print pointer as int to stdout and read it as file descriptor (https://stackoverflow.com/questions/153065/converting-a-pointer-into-an-integer) for EventQueues to access from outside of respective callbacks
+    GLinput CONTROLLER SUPPORT
 
 GLwindow abstraction
 
 Look into CIMGUI https://github.com/cimgui/cimgui and the example https://github.com/peko/cimgui-c-example/blob/master/src/main.c
 
-try to print pointer as int to stdout and read it as file descriptor (https://stackoverflow.com/questions/153065/converting-a-pointer-into-an-integer)
+OpenGL implementation
