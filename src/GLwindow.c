@@ -9,7 +9,7 @@ GLFWwindow *create_window(const int16_t width, const int16_t height, bool fullsc
     // Initialize GLFW library
     if (!glfwInit())
     {
-        printf("glfwInit() Failed To Initialize.\n");
+        log_error("glfwInit() Failed To Initialize.\n");
         return NULL;
     }
 
@@ -28,7 +28,7 @@ GLFWwindow *create_window(const int16_t width, const int16_t height, bool fullsc
     GLFWwindow *window = glfwCreateWindow(width, height, title, monitor, shared);
     if (!window)
     {
-        printf("glfwCreateWindow(), failed to open window.\n");
+        log_error("glfwCreateWindow(), failed to open window.\n");
         glfwTerminate();
         return NULL;
     }
@@ -39,7 +39,7 @@ GLFWwindow *create_window(const int16_t width, const int16_t height, bool fullsc
     // initialize GLAD opengl function loader
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
-        printf("gladLoadGLLoader() Failed To Initialize.\n");
+        log_error("gladLoadGLLoader() Failed To Initialize.\n");
         return NULL;
     }
 

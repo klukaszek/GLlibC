@@ -32,9 +32,9 @@ void mouse_callback(GLFWwindow *window, int button, int action, int mods)
     {
         glfwGetCursorPos(window, &x, &y);
         if (action == GLFW_PRESS)
-            printf("LMB Pressed at (%.1f, %.1f)\n", x, y);
+            log_info("LMB Pressed at (%.1f, %.1f)", x, y);
         if (action == GLFW_RELEASE)
-            printf("LMB Released at (%.1f, %.1f)\n", x, y);
+            log_info("LMB Released at (%.1f, %.1f)", x, y);
 
         return;
     }
@@ -44,9 +44,9 @@ void mouse_callback(GLFWwindow *window, int button, int action, int mods)
     {
         glfwGetCursorPos(window, &x, &y);
         if (action == GLFW_PRESS)
-            printf("RMB Pressed at (%.1f, %.1f)\n", x, y);
+            log_trace("RMB Pressed at (%.1f, %.1f)", x, y);
         if (action == GLFW_RELEASE)
-            printf("RMB Released at (%.1f, %.1f)\n", x, y);
+            log_trace("RMB Released at (%.1f, %.1f)", x, y);
 
         return;
     }
@@ -56,9 +56,9 @@ void mouse_callback(GLFWwindow *window, int button, int action, int mods)
     {
         glfwGetCursorPos(window, &x, &y);
         if (action == GLFW_PRESS)
-            printf("MMB Pressed at (%.1f, %.1f)\n", x, y);
+            log_trace("MMB Pressed at (%.1f, %.1f)", x, y);
         if (action == GLFW_RELEASE)
-            printf("MMB Released at (%.1f, %.1f)\n", x, y);
+            log_trace("MMB Released at (%.1f, %.1f)", x, y);
     }
 }
 

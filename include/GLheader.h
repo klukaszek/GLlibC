@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
 
 //gl function loader and interfacing library
 #include <glad/glad.h>
