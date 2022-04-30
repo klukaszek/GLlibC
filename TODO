@@ -1,5 +1,7 @@
 GET DYNAMIC LINKING TO WORK AT RUNTIME (WORKS AT COMPILE TIME)
 
+GLinput polling implementation
+
 GLwindow CONTROLLER SUPPORT
 
-GLwindow functions
+GLwindow abstraction
