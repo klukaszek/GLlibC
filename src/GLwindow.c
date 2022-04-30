@@ -1,0 +1,102 @@
+#include "GLwindow.h"
+
+/* ------------------------------------------- GLFW Window -----------------------------------------------*/
+
+// create GLFWwindow struct pointer
+GLFWwindow *create_window(const int16_t width, const int16_t height, bool fullscreen, const char *title, GLFWwindow *shared)
+{
+
+    // Initialize GLFW library
+    if (!glfwInit())
+    {
+        printf("glfwInit() Failed To Initialize.\n");
+        return NULL;
+    }
+
+    // Set OPENGL version 4.6 and CORE profile as window hints (based on GLAD loader information)
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+    // monitor structs are not freed by programmer as per glfw documentation
+    GLFWmonitor *monitor = NULL;
+
+    //turn fullscreen on if fullscreen is true
+    if (fullscreen) monitor = glfwGetPrimaryMonitor();
+
+    //create window with GLFW
+    GLFWwindow *window = glfwCreateWindow(width, height, title, monitor, shared);
+    if (!window)
+    {
+        printf("glfwCreateWindow(), failed to open window.\n");
+        glfwTerminate();
+        return NULL;
+    }
+
+    /* Make the window's context current */
+    glfwMakeContextCurrent(window);
+
+    // initialize GLAD opengl function loader
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
+        printf("gladLoadGLLoader() Failed To Initialize.\n");
+        return NULL;
+    }
+
+    // set viewport for drawing
+    glViewport(0, 0, width, height);
+
+    return window;
+}
+
+// set resolution of window
+void set_resolution(GLFWwindow *window, int16_t width, int16_t height)
+{
+    if (window == NULL) return;
+    GLFWmonitor *monitor = glfwGetWindowMonitor(window);
+    const GLFWvidmode *mode = glfwGetVideoMode(monitor);
+
+    glfwSetWindowMonitor(window, monitor, 0, 0, width, height, mode->refreshRate);
+}
+
+// set refresh rate of window
+void set_refresh_rate(GLFWwindow *window, int16_t refresh_rate)
+{
+    if (window == NULL) return;
+    GLFWmonitor *monitor = glfwGetWindowMonitor(window);
+    const GLFWvidmode *mode = glfwGetVideoMode(monitor);
+
+    glfwSetWindowMonitor(window, monitor, 0, 0, mode->width, mode->height, refresh_rate);
+}
+
+// returns whether or not window is fullscreen
+bool is_fullscreen(GLFWwindow *window)
+{
+    if(window == NULL) return false;
+    return glfwGetWindowMonitor(window) != NULL;
+}
+
+//toggles fullscreen on
+void toggle_fullscreen_on(GLFWwindow *window)
+{
+    if(window == NULL) return;
+    GLFWmonitor *monitor = glfwGetPrimaryMonitor();
+    const GLFWvidmode *mode = glfwGetVideoMode(monitor);
+    glfwSetWindowMonitor(window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
+}
+
+// toggles fullscreen off
+void toggle_fullscreen_off(GLFWwindow *window)
+{
+    if (window == NULL) return;
+
+    const int16_t window_w = 640;
+    const int16_t window_h = 480;
+
+    //get primary monitor size in pixels
+    GLFWmonitor *monitor = glfwGetPrimaryMonitor();
+    const GLFWvidmode *mode = glfwGetVideoMode(monitor);
+
+    // unfullscreen window and set window size to 640x480 in middle of primary monitor
+    glfwSetWindowMonitor(window, NULL, (mode->width / 2) - (window_w / 2), (mode->height / 2) - (window_h / 2), window_w, window_h, mode->refreshRate);
+}
