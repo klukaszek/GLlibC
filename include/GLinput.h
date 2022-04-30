@@ -1,5 +1,48 @@
 #include "GLheader.h"
 
+typedef struct key_event
+{
+
+    uint16_t key;
+    uint16_t scancode;
+    uint8_t action;
+    uint8_t mods;
+
+} KeyEvent;
+
+typedef struct key_event_queue
+{
+
+    KeyEvent *curr_e;
+    KeyEvent *prev_e;
+
+} KeyEventQueue;
+
+typedef struct mouse_event
+{
+    GLFWwindow *window;
+    uint8_t button;
+    uint8_t action;
+    uint8_t mods;
+
+} MouseEvent;
+
+typedef struct mouse_event_queue
+{
+    MouseEvent *curr_e;
+    MouseEvent *prev_e;
+
+} MouseEventQueue;
+
+typedef struct instance
+{
+
+    GLFWwindow *window;
+    KeyEventQueue *kq;
+    MouseEventQueue *mq;
+
+} GLinstance;
+
 /* ------------------------------------------- GLFW Window Input Callbacks -----------------------------------------------*/
 
 // simple key_pressed callback for glfwSetKeyCallback(window, callback);
@@ -35,14 +78,18 @@ void mouse_callback(GLFWwindow *window, int button, int action, int mods);
 */
 void scroll_callback(GLFWwindow *window, double xoffset, double yoffset);
 
+/*-------------------------------------------- Key Event Functions --------------------------------------------------*/
 
-/*--------------------------------------------- Input Event Abstraction -----------------------------------------------*/
+// returns a key event passed to window (GLFW implementation, see directX for windows)
+KeyEvent *create_key_event(int key, int scancode, int action, int mods);
 
-//left click event
-void left_mouse_click_event(GLFWwindow *window, int button, int action);
+// returns empty key event queue
+KeyEventQueue *init_key_queue();
 
-//right click event
-void right_mouse_click_event(GLFWwindow *window, int button, int action);
+/*--------------------------------------------- Mouse Event Abstraction -----------------------------------------------*/
 
-//middle mouse event
-void middle_mouse_click_event(GLFWwindow *window, int button, int action);
+//mouse button event
+MouseEvent *create_mouse_event(GLFWwindow *window, int button, int action, int mods);
+
+//logs mouse event to console
+void log_mouse_event(MouseEvent *e);
