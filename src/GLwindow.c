@@ -73,7 +73,9 @@ void set_refresh_rate(GLFWwindow *window, int16_t refresh_rate)
 bool is_fullscreen(GLFWwindow *window)
 {
     if(window == NULL) return false;
-    return glfwGetWindowMonitor(window) != NULL;
+    bool state = glfwGetWindowMonitor(window) != NULL;
+    log_debug("%s", state ? "Is fullscreen." : "Is windowed.");
+    return state;
 }
 
 //toggles fullscreen for window
@@ -87,7 +89,7 @@ void toggle_fullscreen(GLFWwindow *window)
         GLFWmonitor *monitor = glfwGetPrimaryMonitor();
         const GLFWvidmode *mode = glfwGetVideoMode(monitor);
         glfwSetWindowMonitor(window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
-        log_info("Fullscreen toggled.");
+        log_info("Fullscreen toggled on.");
         return;
     }
     else // Toggle fullscreen off
@@ -101,7 +103,7 @@ void toggle_fullscreen(GLFWwindow *window)
 
         // unfullscreen window and set window size to 640x480 in middle of primary monitor
         glfwSetWindowMonitor(window, NULL, (mode->width / 2) - (window_w / 2), (mode->height / 2) - (window_h / 2), window_w, window_h, mode->refreshRate);
-        log_info("Fullscreen toggled.");
+        log_info("Fullscreen toggled off.");
         return;
     }
 }
