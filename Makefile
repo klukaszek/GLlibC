@@ -28,11 +28,11 @@ llib: $(BIN)libglengine.so clean
 
 #.so
 $(BIN)libglengine.so: $(LIB_OBJ_FILES)
-	$(CC) -shared -o $(BIN)libglengine.so $(LIB_OBJ_FILES)
+	$(CC) -shared -o $(BIN)libglengine.so $(LIB_OBJ_FILES) $(LDFLAGS)
 
 #.dll
 $(BIN)libglengine.dll: $(LIB_OBJ_FILES)
-	$(CC) -shared -o $(BIN)libglengine.dll $(LIB_OBJ_FILES) 
+	$(CC) -shared -o $(BIN)libglengine.dll $(LIB_OBJ_FILES) $(LDFLAGS)
 
 #.a
 $(BIN)libglengine.a: $(LIB_OBJ_FILES)
@@ -67,4 +67,16 @@ ifeq ($(OS),Windows_NT)
 	del bin\\*.o
 else
 	rm -rf $(BIN)*.o
+endif
+
+emptybin:
+ifeq ($(OS),Windows_NT)
+	del bin\\*.o
+	del bin\\*.a
+	del bin\\*.dll
+	del bin\\*.so
+else
+	rm -rf $(BIN)*.o
+	rm -rf $(BIN)*.a
+	rm -rf $(BIN)*.so
 endif

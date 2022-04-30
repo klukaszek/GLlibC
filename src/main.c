@@ -3,10 +3,22 @@
 #include "GLwindow.h"
 #include "GLinput.h"
 #include "GLlog.h"
+#include "GLheader.h"
 
 int main(void)
 {
+    const char *platform;
 
+    //get platform name and print
+    #if PLATFORM_NAME == windows
+        platform = "windows";
+    #elif PLATFORM_NAME == linux
+        platform = "linux";
+    #elif PLATFORM_NAME == osx
+        platform = "osx";
+    #endif
+    log_debug("Compilation platform: %s", platform);
+    
     const int16_t window_w = 1920;
     const int16_t window_h = 1080;
     const bool fullscreen = false;
@@ -26,7 +38,7 @@ int main(void)
     glfwSetKeyCallback(window, key_pressed_callback);
     //mouse callback set to personal function mouse_callback
     glfwSetMouseButtonCallback(window, mouse_callback);
-    //scroll callback set to personal function scroll_callbck 
+    //scroll callback set to personal function scroll_callback
     glfwSetScrollCallback(window, scroll_callback);
 
     /* Loop until the user closes the window */
