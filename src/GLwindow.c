@@ -73,30 +73,37 @@ void set_refresh_rate(GLFWwindow *window, int16_t refresh_rate)
 bool is_fullscreen(GLFWwindow *window)
 {
     if(window == NULL) return false;
-    return glfwGetWindowMonitor(window) != NULL;
+    bool state = glfwGetWindowMonitor(window) != NULL;
+    log_debug("%s", state ? "Is fullscreen." : "Is windowed.");
+    return state;
 }
 
-//toggles fullscreen on
-void toggle_fullscreen_on(GLFWwindow *window)
+//toggles fullscreen for window
+void toggle_fullscreen(GLFWwindow *window)
 {
     if(window == NULL) return;
-    GLFWmonitor *monitor = glfwGetPrimaryMonitor();
-    const GLFWvidmode *mode = glfwGetVideoMode(monitor);
-    glfwSetWindowMonitor(window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
-}
 
-// toggles fullscreen off
-void toggle_fullscreen_off(GLFWwindow *window)
-{
-    if (window == NULL) return;
+    //Toggle Fullscreen on
+    if(!is_fullscreen(window))
+    {
+        GLFWmonitor *monitor = glfwGetPrimaryMonitor();
+        const GLFWvidmode *mode = glfwGetVideoMode(monitor);
+        glfwSetWindowMonitor(window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
+        log_info("Fullscreen toggled on.");
+        return;
+    }
+    else // Toggle fullscreen off
+    {
+        int16_t window_w = 640;
+        int16_t window_h = 480;
 
-    const int16_t window_w = 640;
-    const int16_t window_h = 480;
+        // get primary monitor size in pixels
+        GLFWmonitor *monitor = glfwGetPrimaryMonitor();
+        const GLFWvidmode *mode = glfwGetVideoMode(monitor);
 
-    //get primary monitor size in pixels
-    GLFWmonitor *monitor = glfwGetPrimaryMonitor();
-    const GLFWvidmode *mode = glfwGetVideoMode(monitor);
-
-    // unfullscreen window and set window size to 640x480 in middle of primary monitor
-    glfwSetWindowMonitor(window, NULL, (mode->width / 2) - (window_w / 2), (mode->height / 2) - (window_h / 2), window_w, window_h, mode->refreshRate);
+        // unfullscreen window and set window size to 640x480 in middle of primary monitor
+        glfwSetWindowMonitor(window, NULL, (mode->width / 2) - (window_w / 2), (mode->height / 2) - (window_h / 2), window_w, window_h, mode->refreshRate);
+        log_info("Fullscreen toggled off.");
+        return;
+    }
 }

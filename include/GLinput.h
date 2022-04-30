@@ -34,3 +34,15 @@ void mouse_callback(GLFWwindow *window, int button, int action, int mods);
     @return:
 */
 void scroll_callback(GLFWwindow *window, double xoffset, double yoffset);
+
+
+/*--------------------------------------------- Input Event Abstraction -----------------------------------------------*/
+
+//left click event
+void left_mouse_click_event(GLFWwindow *window, int button, int action);
+
+//right click event
+void right_mouse_click_event(GLFWwindow *window, int button, int action);
+
+//middle mouse event
+void middle_mouse_click_event(GLFWwindow *window, int button, int action);

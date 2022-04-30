@@ -1,3 +1,5 @@
+// originally log.c by rxi @ https://github.com/rxi/log.c
+
 /**
  * Copyright (c) 2020 rxi
  *
