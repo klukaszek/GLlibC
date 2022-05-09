@@ -12,6 +12,7 @@
     @param[in] shared GLFWwindow pointer to shared window (leave NULL)
     @return: GLFWwindow *window
 */
+
 GLFWwindow *create_window(const int16_t width, const int16_t height, bool fullscreen, const char *title, GLFWwindow *shared);
 
 // set resolution of GLFWwindow pointer
@@ -25,3 +26,6 @@ bool is_fullscreen(GLFWwindow *window);
 
 // toggles fullscreen on GLFWwindow pointer
 void toggle_fullscreen(GLFWwindow *window);
+
+// Calls glfw terminate and removes unnecessary files
+void gl_terminate();

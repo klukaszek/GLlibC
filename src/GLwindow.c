@@ -107,3 +107,15 @@ void toggle_fullscreen(GLFWwindow *window)
         return;
     }
 }
+
+// Calls glfw terminate and removes unnecessary files
+void gl_terminate()
+{
+    remove("bin/x.in");
+    remove("bin/kb.in");
+    remove("bin/m.in");
+
+    glfwTerminate();
+
+    return;
+}

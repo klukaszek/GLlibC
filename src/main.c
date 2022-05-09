@@ -22,7 +22,7 @@ int main(void)
     const int16_t window_w = 1920;
     const int16_t window_h = 1080;
     const bool fullscreen = false;
-    const char *title = "My Window";
+    const char *title = "My Window"; 
     
     //width, height, fullscreen, window title, shared window
     GLFWwindow *window = create_window(window_w, window_h, fullscreen, title, NULL);
@@ -30,7 +30,7 @@ int main(void)
     //if window initialization fails, terminate glfw and return
     if (window == NULL)
     {
-        glfwTerminate();
+        gl_terminate();
         return -1;
     }
 
@@ -54,8 +54,8 @@ int main(void)
         /* Poll for and process events */
         glfwPollEvents();
     }
-
+    
     //free all data associated with GLFW
-    glfwTerminate();
+    gl_terminate();
     return 0;
 }

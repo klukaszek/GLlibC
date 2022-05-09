@@ -1,5 +1,8 @@
 #include "GLheader.h"
 
+#define KEYSTRLEN 16
+#define MOUSESTRLEN 12
+
 typedef struct key_event
 {
 
@@ -33,15 +36,6 @@ typedef struct mouse_event_queue
     MouseEvent *prev_e;
 
 } MouseEventQueue;
-
-typedef struct instance
-{
-
-    GLFWwindow *window;
-    KeyEventQueue *kq;
-    MouseEventQueue *mq;
-
-} GLinstance;
 
 /* ------------------------------------------- GLFW Window Input Callbacks -----------------------------------------------*/
 
@@ -83,8 +77,8 @@ void scroll_callback(GLFWwindow *window, double xoffset, double yoffset);
 // returns a key event passed to window (GLFW implementation, see directX for windows)
 KeyEvent *create_key_event(int key, int scancode, int action, int mods);
 
-// returns empty key event queue
-KeyEventQueue *init_key_queue();
+//log key event
+void log_key_event(KeyEvent *e);
 
 /*--------------------------------------------- Mouse Event Abstraction -----------------------------------------------*/
 
@@ -93,3 +87,5 @@ MouseEvent *create_mouse_event(GLFWwindow *window, int button, int action, int m
 
 //logs mouse event to console
 void log_mouse_event(MouseEvent *e);
+
+/* -------------------------------------------- Handle Key Event ---------------------------------------*/

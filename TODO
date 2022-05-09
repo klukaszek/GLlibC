@@ -1,7 +1,8 @@
 GET DYNAMIC LINKING TO WORK AT RUNTIME (WORKS AT COMPILE TIME)
 
 GLinput polling implementation (CURRENTLY WORKING ON)
-    try to print pointer as int to stdout and read it as file descriptor (https://stackoverflow.com/questions/153065/converting-a-pointer-into-an-integer) for EventQueues to access from outside of respective callbacks
+    Use (glfwGetKey(window, GLFW_KEY_KEY) == GLFW_PRESS | REPEAT) to manage inputs
+    look into using glfwSetInputMode(window, GLFW_MOD_SHIFT, GLFW_TRUE) for shift + key press/repeat
     GLinput CONTROLLER SUPPORT
 
 GLwindow abstraction

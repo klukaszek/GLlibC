@@ -1,18 +1,6 @@
 #include "GLinput.h"
 #include "GLwindow.h"
-
 /* ------------------------------------------- GLFW Callbacks -----------------------------------------------*/
-
-//Attempt to write key event address to file descriptor so that it can be accessed from outside of callback
-void *stin(KeyEvent *e)
-{
-    #if PLATFORM_NAME == windows
-        log_debug("%p", (void *)e);
-
-        return (void *)e;
-    #endif
-}
-
 
 // simple key_pressed callback for glfwSetKeyCallback(window, callback);
 void key_pressed_callback(GLFWwindow *window, int key, int scancode, int action, int mods)
@@ -26,17 +14,9 @@ void key_pressed_callback(GLFWwindow *window, int key, int scancode, int action,
     else if (action == GLFW_PRESS || action == GLFW_REPEAT)
     {
         KeyEvent *e = create_key_event(key, scancode, action, mods);
-        //original key event
-        log_info("Key Event: %c, %d, %p", key, key, &e); //print letter, ascii val, and pointer to key event
 
-        //obtainable key event from outside of callback
-        void *p = stin(e);
-        KeyEvent *c = malloc(sizeof(KeyEvent));
-        memcpy(c, p, sizeof(KeyEvent));
-        log_debug("Pulled from memory: %c", c->key);
-
+        log_key_event(e);
         free(e);
-        free(c);
     }
 }
 
@@ -75,16 +55,21 @@ KeyEvent *create_key_event(int key, int scancode, int action, int mods)
     return key_e;
 }
 
-// returns empty key event queue for when program starts execution
-KeyEventQueue *init_key_queue()
+// key event to str
+char *key_to_str(KeyEvent *e)
 {
+    char *str = malloc(sizeof(char) * 36);
 
-    KeyEventQueue *eq = malloc(sizeof(KeyEventQueue));
-    eq->curr_e = NULL;
-    eq->prev_e = NULL;
+    sprintf(str, "Key Event: %c, %d, %d, %d, %d", e->key, e->key, e->scancode, e->action, e->mods);
+    return str;
+}
 
-    return eq;
-
+//print key event
+void log_key_event(KeyEvent *e)
+{
+    char *str = key_to_str(e);
+    log_debug(str); // print letter, ascii val, and pointer to key event
+    free(str);
 }
 
 /* ------------------------------------------- Input Events -----------------------------------------------*/
@@ -122,3 +107,5 @@ void log_mouse_event(MouseEvent *e)
     if (e->action == GLFW_PRESS) log_info("%s Pressed at (%.1f, %.1f)", str, x, y);
     if (e->action == GLFW_RELEASE) log_info("%s Released at (%.1f, %.1f)", str, x, y);
 }
+
+/* -------------------------------------------- Handle Key Event ---------------------------------------*/
