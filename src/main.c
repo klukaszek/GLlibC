@@ -34,12 +34,17 @@ int main(void)
         return -1;
     }
 
+    int controller_present = glfwJoystickPresent(GLFW_JOYSTICK_1);
+    log_debug("controller is %s", controller_present ? "present" : "not present");
+
     //key callback set to personal function key_pressed_callback
     glfwSetKeyCallback(window, key_pressed_callback);
     //mouse callback set to personal function mouse_callback
     glfwSetMouseButtonCallback(window, mouse_callback);
     //scroll callback set to personal function scroll_callback
     glfwSetScrollCallback(window, scroll_callback);
+    //controller callback set to personal function controller_callback
+    glfwSetJoystickCallback(controller_callback);
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
@@ -53,6 +58,7 @@ int main(void)
 
         /* Poll for and process events */
         glfwPollEvents();
+        poll_controller_events();
     }
     
     //free all data associated with GLFW

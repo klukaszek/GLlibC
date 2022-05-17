@@ -1,7 +1,6 @@
 #include "GLheader.h"
 
-#define KEYSTRLEN 16
-#define MOUSESTRLEN 12
+#define THUMB_THRESH 0.05
 
 typedef struct key_event
 {
@@ -36,6 +35,14 @@ typedef struct mouse_event_queue
     MouseEvent *prev_e;
 
 } MouseEventQueue;
+
+typedef struct controller_event
+{
+    unsigned char *buttons;
+    float *axes;
+    int jid;
+
+} ControllerEvent;
 
 /* ------------------------------------------- GLFW Window Input Callbacks -----------------------------------------------*/
 
@@ -72,6 +79,15 @@ void mouse_callback(GLFWwindow *window, int button, int action, int mods);
 */
 void scroll_callback(GLFWwindow *window, double xoffset, double yoffset);
 
+//simple controller callback for glfwSetControllerCallback(window, callback);
+/*!
+    @brief
+    @param[in] jid joystick id
+    @param[in] event controller event
+    @return:
+*/
+void controller_callback(int jid, int event);
+
 /*-------------------------------------------- Key Event Functions --------------------------------------------------*/
 
 // returns a key event passed to window (GLFW implementation, see directX for windows)
@@ -80,7 +96,7 @@ KeyEvent *create_key_event(int key, int scancode, int action, int mods);
 //log key event
 void log_key_event(KeyEvent *e);
 
-/*--------------------------------------------- Mouse Event Abstraction -----------------------------------------------*/
+/*--------------------------------------------- Mouse Event Functions -----------------------------------------------*/
 
 //mouse button event
 MouseEvent *create_mouse_event(GLFWwindow *window, int button, int action, int mods);
@@ -88,4 +104,19 @@ MouseEvent *create_mouse_event(GLFWwindow *window, int button, int action, int m
 //logs mouse event to console
 void log_mouse_event(MouseEvent *e);
 
+/*--------------------------------------------- Controller Event Functions -----------------------------------------------*/
+//returns controller event
+ControllerEvent *get_controller_event(int jid);
+
+//logs controller event information
+void log_controller_event(ControllerEvent *e);
+
 /* -------------------------------------------- Handle Key Event ---------------------------------------*/
+
+//COMPLETE LATER, USE HASHMAP OR SOME DATA STRUCTURE TO PASS KEYBINDINGS AS PARAMETERS TO FUNCTION
+KeyEvent *get_key_event(GLFWwindow *window);
+
+/* -------------------------------------------- Handle Controller Event ---------------------------------------*/
+
+//Handle controller events for main function
+void poll_controller_events();

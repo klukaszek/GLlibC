@@ -39,7 +39,27 @@ void scroll_callback(GLFWwindow *window, double xoffset, double yoffset)
     log_info("xOffset: %.1f, yOffset: %.1f", xoffset, yoffset);
 }
 
-/* ------------------------------------------ Get Input Events ---------------------------------------------*/
+void controller_callback(int jid, int event)
+{
+    if (event == GLFW_CONNECTED)
+    {
+        if(glfwJoystickIsGamepad(jid))
+        {
+            const char * name = glfwGetGamepadName(jid);
+            log_debug("%s Connected", name);
+        }
+    }
+    else if (event == GLFW_DISCONNECTED)
+    {
+        if (glfwJoystickIsGamepad(jid))
+        {
+            const char *name = glfwGetGamepadName(jid);
+            log_debug("%s Disconnected", name);
+        }
+    }
+}
+
+/* ------------------------------------------ Key Event Functions ---------------------------------------------*/
 
 // returns previous key event passed to window (GLFW implementation, see directX for windows)
 KeyEvent *create_key_event(int key, int scancode, int action, int mods)
@@ -72,7 +92,7 @@ void log_key_event(KeyEvent *e)
     free(str);
 }
 
-/* ------------------------------------------- Input Events -----------------------------------------------*/
+/* ------------------------------------------- Mouse Event Functions -----------------------------------------------*/
 
 // mouse button event
 MouseEvent *create_mouse_event(GLFWwindow *window, int button, int action, int mods)
@@ -108,4 +128,104 @@ void log_mouse_event(MouseEvent *e)
     if (e->action == GLFW_RELEASE) log_info("%s Released at (%.1f, %.1f)", str, x, y);
 }
 
+/* ------------------------------------------- Controller Event Functions -----------------------------------------------*/
+
+// returns controller event
+ControllerEvent *get_controller_event(int jid)
+{
+    GLFWgamepadstate state;
+
+    //function already checks if joystick is connected so it does not have to be done at the top
+    if(glfwGetGamepadState(jid, &state))
+    {
+
+        ControllerEvent *e = malloc(sizeof(ControllerEvent));
+
+        e->buttons = state.buttons;
+        e->axes = state.axes;
+        e->jid = jid;
+
+        return e;
+    }
+
+    return NULL;
+}
+
+// logs controller event information
+void log_controller_event(ControllerEvent *e)
+{
+
+    double t = THUMB_THRESH;
+
+    if (e != NULL)
+    {
+
+        // handle utility buttons
+        if ((e->buttons[GLFW_GAMEPAD_BUTTON_START] == GLFW_PRESS) | (e->buttons[GLFW_GAMEPAD_BUTTON_BACK] == GLFW_PRESS))
+        {
+            log_debug("Start: %s | Select: %s", e->buttons[GLFW_GAMEPAD_BUTTON_START] ? "Pressed" : "Released", e->buttons[GLFW_GAMEPAD_BUTTON_BACK] ? "Pressed" : "Released");
+        }
+
+        // handle thumbstick buttons
+        if ((e->buttons[GLFW_GAMEPAD_BUTTON_LEFT_THUMB] == GLFW_PRESS) | (e->buttons[GLFW_GAMEPAD_BUTTON_RIGHT_THUMB] == GLFW_PRESS))
+        {
+            log_debug("L3: %s | R3: %s", e->buttons[GLFW_GAMEPAD_BUTTON_LEFT_THUMB] ? "Pressed" : "Released", e->buttons[GLFW_GAMEPAD_BUTTON_RIGHT_THUMB] ? "Pressed" : "Released");
+        }
+
+        // handle left thumbstick values
+        if ((e->axes[GLFW_GAMEPAD_AXIS_LEFT_X] > t) | (e->axes[GLFW_GAMEPAD_AXIS_LEFT_X] < -t) | (e->axes[GLFW_GAMEPAD_AXIS_LEFT_Y] > t) | (e->axes[GLFW_GAMEPAD_AXIS_LEFT_Y] < -t))
+        {
+            log_debug("L Thumb X: %.2f | L Thumb Y: %.2f", e->axes[GLFW_GAMEPAD_AXIS_LEFT_X], e->axes[GLFW_GAMEPAD_AXIS_LEFT_Y]);
+        }
+
+        // handle right thumbstick values
+        if ((e->axes[GLFW_GAMEPAD_AXIS_RIGHT_X] > t) | (e->axes[GLFW_GAMEPAD_AXIS_RIGHT_X] < -t) | (e->axes[GLFW_GAMEPAD_AXIS_RIGHT_Y] > t) | (e->axes[GLFW_GAMEPAD_AXIS_RIGHT_Y] < -t))
+        {
+            log_debug("R Thumb X: %.2f | R Thumb Y: %.2f", e->axes[GLFW_GAMEPAD_AXIS_RIGHT_X], e->axes[GLFW_GAMEPAD_AXIS_RIGHT_Y]);
+        }
+
+        // handle shoulder buttons
+        if ((e->buttons[GLFW_GAMEPAD_BUTTON_RIGHT_BUMPER] == GLFW_PRESS) | (e->buttons[GLFW_GAMEPAD_BUTTON_LEFT_BUMPER] == GLFW_PRESS) | (e->axes[GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER] > -1) | (e->axes[GLFW_GAMEPAD_AXIS_LEFT_TRIGGER] > -1))
+        {
+            log_debug("R1: %s | L1: %s | R2: %.2f | L2: %.2f", e->buttons[GLFW_GAMEPAD_BUTTON_RIGHT_BUMPER] ? "Pressed" : "Released", e->buttons[GLFW_GAMEPAD_BUTTON_LEFT_BUMPER] ? "Pressed" : "Released", e->axes[GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER], e->axes[GLFW_GAMEPAD_AXIS_LEFT_TRIGGER]);
+        }
+
+        // handle face buttons
+        if ((e->buttons[GLFW_GAMEPAD_BUTTON_A] == GLFW_PRESS) | (e->buttons[GLFW_GAMEPAD_BUTTON_B] == GLFW_PRESS) | (e->buttons[GLFW_GAMEPAD_BUTTON_Y] == GLFW_PRESS) | (e->buttons[GLFW_GAMEPAD_BUTTON_X] == GLFW_PRESS))
+        {
+            log_debug("A: %s | B: %s | Y: %s | X: %s", e->buttons[GLFW_GAMEPAD_BUTTON_A] ? "Pressed" : "Released", e->buttons[GLFW_GAMEPAD_BUTTON_B] ? "Pressed" : "Released", e->buttons[GLFW_GAMEPAD_BUTTON_Y] ? "Pressed" : "Released", e->buttons[GLFW_GAMEPAD_BUTTON_X] ? "Pressed" : "Released");
+        }
+
+        // handle dpad
+        if ((e->buttons[GLFW_GAMEPAD_BUTTON_DPAD_DOWN] == GLFW_PRESS) | (e->buttons[GLFW_GAMEPAD_BUTTON_DPAD_RIGHT] == GLFW_PRESS) | (e->buttons[GLFW_GAMEPAD_BUTTON_DPAD_UP] == GLFW_PRESS) | (e->buttons[GLFW_GAMEPAD_BUTTON_DPAD_LEFT] == GLFW_PRESS))
+        {
+            log_debug("Down: %s | Right: %s | Up: %s | Left: %s", e->buttons[GLFW_GAMEPAD_BUTTON_DPAD_DOWN] ? "Pressed" : "Released", e->buttons[GLFW_GAMEPAD_BUTTON_DPAD_RIGHT] ? "Pressed" : "Released", e->buttons[GLFW_GAMEPAD_BUTTON_DPAD_UP] ? "Pressed" : "Released", e->buttons[GLFW_GAMEPAD_BUTTON_DPAD_LEFT] ? "Pressed" : "Released");
+        }
+    }
+}
+
 /* -------------------------------------------- Handle Key Event ---------------------------------------*/
+
+//come back later
+KeyEvent *get_key_event(GLFWwindow *window)
+{
+
+    return NULL;
+
+}
+
+/* -------------------------------------------- Handle Controller Event ---------------------------------------*/
+
+// Handle controller events for main function
+void poll_controller_events()
+{
+    if(!glfwJoystickPresent(GLFW_JOYSTICK_1)) return;
+
+    ControllerEvent *e = get_controller_event(GLFW_JOYSTICK_1);
+
+    if(e == NULL) return;
+
+    log_controller_event(e);
+
+    free(e);
+}
