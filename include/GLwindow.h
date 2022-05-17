@@ -15,8 +15,20 @@
     @param[in] shared GLFWwindow pointer to shared window (leave NULL)
     @return: GLFWwindow *window
 */
-
 GLFWwindow *create_window(const int16_t width, const int16_t height, bool fullscreen, const char *title, GLFWwindow *shared);
+
+// setup window callbacks, use NULL in place of function pointers if you do not want to use
+/*!
+    @brief
+    @param[in] window GLFWwindow pointer (can't be NULL)
+    @param[in] user_pointer void pointer to struct of user_pointer (can be NULL)
+    @param[in] key_callback GLFWkeyfun of keyboard callback (can be NULL for no callback)
+    @param[in] mouse_callback GLFWmousebuttonfun of mouse button callback (can be NULL for no callback)
+    @param[in] scroll_callback GLFWscrollfun of scroll callback (can be NULL for no callback)
+    @param[in] controller_callback GLFWjoystickfun of joystick callback (can be NULL for no callback)
+    @return:
+*/
+void gl_set_window_callbacks(GLFWwindow *window, void *user_pointer, GLFWkeyfun key_callback, GLFWmousebuttonfun mouse_callback, GLFWscrollfun scroll_callback, GLFWjoystickfun controller_callback);
 
 // set resolution of GLFWwindow pointer
 void set_resolution(GLFWwindow *window, int16_t width, int16_t height);

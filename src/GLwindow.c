@@ -49,6 +49,25 @@ GLFWwindow *create_window(const int16_t width, const int16_t height, bool fullsc
     return window;
 }
 
+// setup window callbacks, use NULL in place of user pointer and function pointers if you do not want to use them in your program
+void gl_set_window_callbacks(GLFWwindow *window, void *user_pointer, GLFWkeyfun key_callback, GLFWmousebuttonfun mouse_callback, GLFWscrollfun scroll_callback, GLFWjoystickfun controller_callback)
+{
+    //set window user pointer for later callback usage
+    glfwSetWindowUserPointer(window, user_pointer);
+
+    // key callback set to personal function key_pressed_callback
+    glfwSetKeyCallback(window, key_callback);
+    // mouse callback set to personal function mouse_callback
+    glfwSetMouseButtonCallback(window, mouse_callback);
+    // scroll callback set to personal function scroll_callback
+    glfwSetScrollCallback(window, scroll_callback);
+
+    //set joystick user pointer
+    glfwSetJoystickUserPointer(GLFW_JOYSTICK_1, user_pointer);
+    // controller callback set to personal function controller_callback
+    glfwSetJoystickCallback(controller_callback);
+}
+
 // set resolution of window
 void set_resolution(GLFWwindow *window, int16_t width, int16_t height)
 {
@@ -100,14 +119,14 @@ void toggle_fullscreen(GLFWwindow *window)
         GLFWmonitor *monitor = glfwGetPrimaryMonitor();
         const GLFWvidmode *mode = glfwGetVideoMode(monitor);
 
-        // unfullscreen window and set window size to 640x480 in middle of primary monitor
+        // unfullscreen window and set window in middle of primary monitor
         glfwSetWindowMonitor(window, NULL, (mode->width / 2) - (window_w / 2), (mode->height / 2) - (window_h / 2), window_w, window_h, mode->refreshRate);
         log_info("Fullscreen toggled off.");
         return;
     }
 }
 
-// Calls glfw terminate and removes unnecessary files
+// Calls glfw terminate and removes unnecessary files (come back to this later)
 void gl_terminate()
 {
 

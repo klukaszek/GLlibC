@@ -1,7 +1,11 @@
 # this makefile creates engine executable (CAN BE EASILY CONVERTED TO C++ BY CHANGING CC)
 CC = gcc
 CFLAGS = -Wall -std=c17 -Wpedantic -g -s
-LDFLAGS = -lglfw3 -lglad -lgdi32 -lopengl32 -lcglm
+ifeq ($(OS),Windows_NT)
+	LDFLAGS = -lglfw3 -lglad -lgdi32 -lopengl32 -lcglm
+else
+	LDFLAGS = -lglfw3 -lglad -lX11 -lopengl32 -lcglm
+endif
 
 INC = include/
 SRC = src/

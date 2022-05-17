@@ -36,14 +36,8 @@ int main(void)
     int num_controllers = count_controllers();
     log_debug("%d controller(s) connected.", num_controllers);
 
-    //key callback set to personal function key_pressed_callback
-    glfwSetKeyCallback(window, key_pressed_callback);
-    //mouse callback set to personal function mouse_callback
-    glfwSetMouseButtonCallback(window, mouse_callback);
-    //scroll callback set to personal function scroll_callback
-    glfwSetScrollCallback(window, scroll_callback);
-    //controller callback set to personal function controller_callback
-    glfwSetJoystickCallback(controller_callback);
+    //Set callbacks for window
+    gl_set_window_callbacks(window, NULL, key_pressed_callback, mouse_callback, scroll_callback, controller_callback);
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))

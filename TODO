@@ -7,9 +7,10 @@ GLinput polling implementation (CURRENTLY WORKING ON)
 
     Use (glfwGetKey(window, GLFW_KEY_KEY) == GLFW_PRESS | REPEAT) to manage inputs
     look into using glfwSetInputMode(window, GLFW_MOD_SHIFT, GLFW_TRUE) for shift + key press/repeat
-    look into using multiple controllers (probably just check every joystick port and make an array with all present joysticks)
 
 GLwindow abstraction
+
+Dont forget to update gl_terminate() whenever there are things that need to be terminated at program termination
 
 Look into CIMGUI https://github.com/cimgui/cimgui and the example https://github.com/peko/cimgui-c-example/blob/master/src/main.c
 
