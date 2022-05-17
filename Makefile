@@ -1,9 +1,13 @@
 # this makefile creates engine executable (CAN BE EASILY CONVERTED TO C++ BY CHANGING CC)
 CC = gcc
+#consider declaring cflags based on OS and state of program, for a release on windows use -mwindows flag to eliminate the console from the runtime
 CFLAGS = -Wall -std=c17 -Wpedantic -g -s
+
 ifeq ($(OS),Windows_NT)
+#this uses -lgdi32 for window server library
 	LDFLAGS = -lglfw3 -lglad -lgdi32 -lopengl32 -lcglm
 else
+#this uses -lX11 for window server library
 	LDFLAGS = -lglfw3 -lglad -lX11 -lopengl32 -lcglm
 endif
 

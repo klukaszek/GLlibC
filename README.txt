@@ -3,7 +3,6 @@
 REQUIRED LIBRARIES FOR COMPILATION
 
 -lopengl32: should exist on your system by default.
--lgdi32: WINDOWS GDI (when porting to linux adjust makefile to change to X11)
 -log.c: INCLUDED IN PROJECT, RENAMED TO GLlog.c and GLlog.h (https://github.com/rxi/log.c)
 
 -lglfw3 (libglfw3.a): look up compiling glfw using cmake
