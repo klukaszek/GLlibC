@@ -53,7 +53,7 @@ $(BIN)GL%.o: $(SRC)GL%.c $(INC)GL*.h $(INC)GLheader.h
 #LIBRARIES (.dll/.so/.a) SHOULD BE LOCATED IN "/bin" FOR EASIER ACCESS (BY DEFAULT WRITTEN TO "/bin")
 #CAN PUT IN LINKER LIBRARY PATH IF YOU WANT TO
 
-# ------------------------- EXECUTABLE STARTS HERE ---------------------------------
+# ------------------------- EXECUTABLE/ENTRYPOINT STARTS HERE ---------------------------------
 
 #CHANGE PROGRAM NAME HERE
 #FOR UNIX LINK WITH .SO FILE INSTEAD OF DLL FILE
