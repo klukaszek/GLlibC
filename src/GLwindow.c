@@ -74,7 +74,6 @@ bool is_fullscreen(GLFWwindow *window)
 {
     if(window == NULL) return false;
     bool state = glfwGetWindowMonitor(window) != NULL;
-    log_debug("%s", state ? "Is fullscreen." : "Is windowed.");
     return state;
 }
 
@@ -94,8 +93,8 @@ void toggle_fullscreen(GLFWwindow *window)
     }
     else // Toggle fullscreen off
     {
-        int16_t window_w = 640;
-        int16_t window_h = 480;
+        int16_t window_w = WIDTH;
+        int16_t window_h = HEIGHT;
 
         // get primary monitor size in pixels
         GLFWmonitor *monitor = glfwGetPrimaryMonitor();
@@ -111,9 +110,6 @@ void toggle_fullscreen(GLFWwindow *window)
 // Calls glfw terminate and removes unnecessary files
 void gl_terminate()
 {
-    remove("bin/x.in");
-    remove("bin/kb.in");
-    remove("bin/m.in");
 
     glfwTerminate();
 

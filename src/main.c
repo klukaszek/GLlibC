@@ -1,9 +1,8 @@
 //MAKE SHARED LIBRARY OR STATIC LIBRARY USING MAKEFILE AND LINK IT TO YOUR PROJECT, INCLUDE HEADER FILES AT TOP
 
+#include "GLheader.h"
 #include "GLwindow.h"
 #include "GLinput.h"
-#include "GLlog.h"
-#include "GLheader.h"
 
 int main(void)
 {
@@ -19,8 +18,8 @@ int main(void)
     #endif
     log_debug("Compilation platform: %s", platform);
     
-    const int16_t window_w = 1920;
-    const int16_t window_h = 1080;
+    const int16_t window_w = WIDTH;
+    const int16_t window_h = HEIGHT;
     const bool fullscreen = false;
     const char *title = "My Window"; 
     
@@ -35,7 +34,7 @@ int main(void)
     }
 
     int num_controllers = count_controllers();
-    log_debug("There are %d controllers connected.", num_controllers);
+    log_debug("%d controller(s) connected.", num_controllers);
 
     //key callback set to personal function key_pressed_callback
     glfwSetKeyCallback(window, key_pressed_callback);
@@ -57,8 +56,7 @@ int main(void)
         glfwSwapBuffers(window);
 
         /* Poll for and process events */
-        glfwPollEvents();
-        poll_controller_events(num_controllers);
+        gl_poll_events(num_controllers);
     }
     
     //free all data associated with GLFW

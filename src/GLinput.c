@@ -220,13 +220,13 @@ KeyEvent *get_key_event(GLFWwindow *window)
 int count_controllers()
 {
     int count = 0;
-    int max_controllers = 2; //change this if you want more controllers
+    int max_controllers = MAX_CONTROLLERS; //change this macro in GLinput.h if you want more controllers
 
     for(int i = 0; i < max_controllers; i++)
     {
-        if(glfwJoystickPresent(GLFW_JOYSTICK_1))
+        if(glfwJoystickPresent(i))
         {
-            log_debug("controller %d is present", i + 1);
+            log_debug("controller id: %d is present", i);
             count++;
         }
     }
@@ -241,11 +241,18 @@ void poll_controller_events(int num_controllers)
     {
         ControllerEvent *e = get_controller_event(i);
 
-        if (e == NULL)
-            return;
+        if (e == NULL) return;
 
         log_controller_event(e);
 
         free(e);
     }
+}
+
+/* -------------------------------------------- Poll Events ---------------------------------------*/
+// calls glfwPollEvents() and poll_controller_events(int num_controllers)
+void gl_poll_events(int num_controllers)
+{
+    glfwPollEvents();
+    poll_controller_events(num_controllers);
 }

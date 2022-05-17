@@ -1,5 +1,6 @@
 #include "GLheader.h"
 
+#define MAX_CONTROLLERS 1
 #define THUMB_THRESH 0.05
 
 typedef struct key_event
@@ -122,3 +123,7 @@ int count_controllers();
 
 //Handle controller events for main function
 void poll_controller_events(int num_controllers);
+
+/* -------------------------------------------- Poll Events ---------------------------------------*/
+//calls glfwPollEvents() and poll_controller_events(int num_controllers)
+void gl_poll_events(int num_controllers);

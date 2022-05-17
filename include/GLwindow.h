@@ -1,5 +1,8 @@
 #include "GLheader.h"
 
+#define WIDTH 1920
+#define HEIGHT 1080
+
 /* ------------------------------------------- GLFW Window Functions -----------------------------------------------*/
 
 // Creates and returns GLFW Window Structure Pointer
