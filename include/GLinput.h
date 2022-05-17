@@ -117,6 +117,8 @@ void log_controller_event(ControllerEvent *e);
 KeyEvent *get_key_event(GLFWwindow *window);
 
 /* -------------------------------------------- Handle Controller Event ---------------------------------------*/
+//returns number of controllers connected
+int count_controllers();
 
 //Handle controller events for main function
-void poll_controller_events();
+void poll_controller_events(int num_controllers);

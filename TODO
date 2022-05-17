@@ -1,6 +1,10 @@
 GET DYNAMIC LINKING TO WORK AT RUNTIME (WORKS AT COMPILE TIME)
 
 GLinput polling implementation (CURRENTLY WORKING ON)
+
+    SUPER IMPORTANT BECAUSE THIS COULD BE A BIG OPTIMIZATION DOWN THE ROAD 
+        -----> LOOK INTO SETTING WINDOW AND JOYSTICK USER POINTERS TO ACCESS CONTEXTUAL DATA FROM WITHIN CALLBACKS (THESE USER POINTERS COULD BE OPERATION STATES (acting as structs))
+
     Use (glfwGetKey(window, GLFW_KEY_KEY) == GLFW_PRESS | REPEAT) to manage inputs
     look into using glfwSetInputMode(window, GLFW_MOD_SHIFT, GLFW_TRUE) for shift + key press/repeat
     look into using multiple controllers (probably just check every joystick port and make an array with all present joysticks)

@@ -34,8 +34,8 @@ int main(void)
         return -1;
     }
 
-    int controller_present = glfwJoystickPresent(GLFW_JOYSTICK_1);
-    log_debug("controller is %s", controller_present ? "present" : "not present");
+    int num_controllers = count_controllers();
+    log_debug("There are %d controllers connected.", num_controllers);
 
     //key callback set to personal function key_pressed_callback
     glfwSetKeyCallback(window, key_pressed_callback);
@@ -58,7 +58,7 @@ int main(void)
 
         /* Poll for and process events */
         glfwPollEvents();
-        poll_controller_events();
+        poll_controller_events(num_controllers);
     }
     
     //free all data associated with GLFW
