@@ -8,7 +8,9 @@ GLinput polling implementation (CURRENTLY WORKING ON)
     Use (glfwGetKey(window, GLFW_KEY_KEY) == GLFW_PRESS | REPEAT) to manage inputs
     look into using glfwSetInputMode(window, GLFW_MOD_SHIFT, GLFW_TRUE) for shift + key press/repeat
 
-GLwindow abstraction
+OpenGL Work:
+    Shader compilation seems to work.
+    Shader linking works.
 
 Dont forget to update gl_terminate() whenever there are things that need to be terminated at program termination
 

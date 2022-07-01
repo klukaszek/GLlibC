@@ -88,7 +88,7 @@ char *key_to_str(KeyEvent *e)
 void log_key_event(KeyEvent *e)
 {
     char *str = key_to_str(e);
-    log_debug(str); // print letter, ascii val, and pointer to key event
+    log_info(str); // print letter, ascii val, and pointer to key event
     free(str);
 }
 
@@ -163,43 +163,43 @@ void log_controller_event(ControllerEvent *e)
         // handle utility buttons
         if ((e->buttons[GLFW_GAMEPAD_BUTTON_START] == GLFW_PRESS) | (e->buttons[GLFW_GAMEPAD_BUTTON_BACK] == GLFW_PRESS))
         {
-            log_debug("Controller %d // Start: %s | Select: %s", e->jid, e->buttons[GLFW_GAMEPAD_BUTTON_START] ? "Pressed" : "Released", e->buttons[GLFW_GAMEPAD_BUTTON_BACK] ? "Pressed" : "Released");
+            log_info("Controller %d // Start: %s | Select: %s", e->jid, e->buttons[GLFW_GAMEPAD_BUTTON_START] ? "Pressed" : "Released", e->buttons[GLFW_GAMEPAD_BUTTON_BACK] ? "Pressed" : "Released");
         }
 
         // handle thumbstick buttons
         if ((e->buttons[GLFW_GAMEPAD_BUTTON_LEFT_THUMB] == GLFW_PRESS) | (e->buttons[GLFW_GAMEPAD_BUTTON_RIGHT_THUMB] == GLFW_PRESS))
         {
-            log_debug("Controller %d // L3: %s | R3: %s", e->jid, e->buttons[GLFW_GAMEPAD_BUTTON_LEFT_THUMB] ? "Pressed" : "Released", e->buttons[GLFW_GAMEPAD_BUTTON_RIGHT_THUMB] ? "Pressed" : "Released");
+            log_info("Controller %d // L3: %s | R3: %s", e->jid, e->buttons[GLFW_GAMEPAD_BUTTON_LEFT_THUMB] ? "Pressed" : "Released", e->buttons[GLFW_GAMEPAD_BUTTON_RIGHT_THUMB] ? "Pressed" : "Released");
         }
 
         // handle left thumbstick values
         if ((e->axes[GLFW_GAMEPAD_AXIS_LEFT_X] > t) | (e->axes[GLFW_GAMEPAD_AXIS_LEFT_X] < -t) | (e->axes[GLFW_GAMEPAD_AXIS_LEFT_Y] > t) | (e->axes[GLFW_GAMEPAD_AXIS_LEFT_Y] < -t))
         {
-            log_debug("Controller %d // L Thumb X: %.2f | L Thumb Y: %.2f", e->jid, e->axes[GLFW_GAMEPAD_AXIS_LEFT_X], e->axes[GLFW_GAMEPAD_AXIS_LEFT_Y]);
+            log_info("Controller %d // L Thumb X: %.2f | L Thumb Y: %.2f", e->jid, e->axes[GLFW_GAMEPAD_AXIS_LEFT_X], e->axes[GLFW_GAMEPAD_AXIS_LEFT_Y]);
         }
 
         // handle right thumbstick values
         if ((e->axes[GLFW_GAMEPAD_AXIS_RIGHT_X] > t) | (e->axes[GLFW_GAMEPAD_AXIS_RIGHT_X] < -t) | (e->axes[GLFW_GAMEPAD_AXIS_RIGHT_Y] > t) | (e->axes[GLFW_GAMEPAD_AXIS_RIGHT_Y] < -t))
         {
-            log_debug("Controller %d // R Thumb X: %.2f | R Thumb Y: %.2f", e->jid, e->axes[GLFW_GAMEPAD_AXIS_RIGHT_X], e->axes[GLFW_GAMEPAD_AXIS_RIGHT_Y]);
+            log_info("Controller %d // R Thumb X: %.2f | R Thumb Y: %.2f", e->jid, e->axes[GLFW_GAMEPAD_AXIS_RIGHT_X], e->axes[GLFW_GAMEPAD_AXIS_RIGHT_Y]);
         }
 
         // handle shoulder buttons
         if ((e->buttons[GLFW_GAMEPAD_BUTTON_RIGHT_BUMPER] == GLFW_PRESS) | (e->buttons[GLFW_GAMEPAD_BUTTON_LEFT_BUMPER] == GLFW_PRESS) | (e->axes[GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER] > -1) | (e->axes[GLFW_GAMEPAD_AXIS_LEFT_TRIGGER] > -1))
         {
-            log_debug("Controller %d // R1: %s | L1: %s | R2: %.2f | L2: %.2f", e->jid, e->buttons[GLFW_GAMEPAD_BUTTON_RIGHT_BUMPER] ? "Pressed" : "Released", e->buttons[GLFW_GAMEPAD_BUTTON_LEFT_BUMPER] ? "Pressed" : "Released", e->axes[GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER], e->axes[GLFW_GAMEPAD_AXIS_LEFT_TRIGGER]);
+            log_info("Controller %d // R1: %s | L1: %s | R2: %.2f | L2: %.2f", e->jid, e->buttons[GLFW_GAMEPAD_BUTTON_RIGHT_BUMPER] ? "Pressed" : "Released", e->buttons[GLFW_GAMEPAD_BUTTON_LEFT_BUMPER] ? "Pressed" : "Released", e->axes[GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER], e->axes[GLFW_GAMEPAD_AXIS_LEFT_TRIGGER]);
         }
 
         // handle face buttons
         if ((e->buttons[GLFW_GAMEPAD_BUTTON_A] == GLFW_PRESS) | (e->buttons[GLFW_GAMEPAD_BUTTON_B] == GLFW_PRESS) | (e->buttons[GLFW_GAMEPAD_BUTTON_Y] == GLFW_PRESS) | (e->buttons[GLFW_GAMEPAD_BUTTON_X] == GLFW_PRESS))
         {
-            log_debug("Controller %d // A: %s | B: %s | Y: %s | X: %s", e->jid, e->buttons[GLFW_GAMEPAD_BUTTON_A] ? "Pressed" : "Released", e->buttons[GLFW_GAMEPAD_BUTTON_B] ? "Pressed" : "Released", e->buttons[GLFW_GAMEPAD_BUTTON_Y] ? "Pressed" : "Released", e->buttons[GLFW_GAMEPAD_BUTTON_X] ? "Pressed" : "Released");
+            log_info("Controller %d // A: %s | B: %s | Y: %s | X: %s", e->jid, e->buttons[GLFW_GAMEPAD_BUTTON_A] ? "Pressed" : "Released", e->buttons[GLFW_GAMEPAD_BUTTON_B] ? "Pressed" : "Released", e->buttons[GLFW_GAMEPAD_BUTTON_Y] ? "Pressed" : "Released", e->buttons[GLFW_GAMEPAD_BUTTON_X] ? "Pressed" : "Released");
         }
 
         // handle dpad
         if ((e->buttons[GLFW_GAMEPAD_BUTTON_DPAD_DOWN] == GLFW_PRESS) | (e->buttons[GLFW_GAMEPAD_BUTTON_DPAD_RIGHT] == GLFW_PRESS) | (e->buttons[GLFW_GAMEPAD_BUTTON_DPAD_UP] == GLFW_PRESS) | (e->buttons[GLFW_GAMEPAD_BUTTON_DPAD_LEFT] == GLFW_PRESS))
         {
-            log_debug("Controller %d // Down: %s | Right: %s | Up: %s | Left: %s", e->jid, e->buttons[GLFW_GAMEPAD_BUTTON_DPAD_DOWN] ? "Pressed" : "Released", e->buttons[GLFW_GAMEPAD_BUTTON_DPAD_RIGHT] ? "Pressed" : "Released", e->buttons[GLFW_GAMEPAD_BUTTON_DPAD_UP] ? "Pressed" : "Released", e->buttons[GLFW_GAMEPAD_BUTTON_DPAD_LEFT] ? "Pressed" : "Released");
+            log_info("Controller %d // Down: %s | Right: %s | Up: %s | Left: %s", e->jid, e->buttons[GLFW_GAMEPAD_BUTTON_DPAD_DOWN] ? "Pressed" : "Released", e->buttons[GLFW_GAMEPAD_BUTTON_DPAD_RIGHT] ? "Pressed" : "Released", e->buttons[GLFW_GAMEPAD_BUTTON_DPAD_UP] ? "Pressed" : "Released", e->buttons[GLFW_GAMEPAD_BUTTON_DPAD_LEFT] ? "Pressed" : "Released");
         }
     }
 }
