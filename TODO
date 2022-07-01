@@ -9,11 +9,19 @@ GLinput polling implementation (CURRENTLY WORKING ON)
     look into using glfwSetInputMode(window, GLFW_MOD_SHIFT, GLFW_TRUE) for shift + key press/repeat
 
 OpenGL Work:
-    Shader compilation seems to work.
-    Shader linking works.
+
+    Completed:
+        Shader compilation seems to work.
+        Shader linking works.
+        Can draw triangles.
+
+    TODO:
+        Draw square.
+        Look into abstracting the process of using VAOs and VBOs to draw to screen using an array of vertex points.
+        Change color on keypress.
+        Translate object in 2D space using keyboard and controller.
+    
 
 Dont forget to update gl_terminate() whenever there are things that need to be terminated at program termination
 
 Look into CIMGUI https://github.com/cimgui/cimgui and the example https://github.com/peko/cimgui-c-example/blob/master/src/main.c
-
-OpenGL implementation
