@@ -3,15 +3,15 @@
 REQUIRED LIBRARIES FOR COMPILATION
 
 -lopengl32: should exist on your system by default.
--log.c: INCLUDED IN PROJECT, RENAMED TO GLlog.c and GLlog.h (https://github.com/rxi/log.c)
+-log.c: INCLUDED IN PROJECT, RENAMED TO GLlog.c and GLlog.h (https://github.com/rxi/log.c) (MIT LICENSE)
 
 -lglfw3 (libglfw3.a): look up compiling glfw using cmake
 
--lcglm: C GLM Math library 
+-lcglm: C GLM Math library (MIT LICENSE)
 
     goto https://github.com/recp/cglm.
     install include folder to "include path". (UNIX: usr/include), (Windows: wherever mingw32/TDM-GCC "/include" folder is located)
-    change CMakeLists.txt to "static library" at the top (THIS IS BEING DONE BECAUSE DLLS DONT WORK ON WINDOWS AT THE MOMENT)
+    change CMakeLists.txt to "static library" at the top (THIS IS BEING DONE BECAUSE I WAS HAVING MORE TROUBLE WITH DYNAMIC LINKED LIBRARIES)
     make "build" directory in CGLM folder
     run these commands:
 
