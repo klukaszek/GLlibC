@@ -50,5 +50,4 @@ Basic functionality that I was plannning on implementing was importing meshes, u
 
 
 
-Libraries can also be linked using the "-L/libpath" flag to point to a folder that contains the libraries
--------------------------------------------------------------------------------------
+- Libraries can also be linked using the "-L/libpath" flag to point to a folder that contains the libraries
