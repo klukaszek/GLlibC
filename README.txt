@@ -1,3 +1,5 @@
+Deprecated for now but I might return to working on this project if I find some inspiration, for now I'm just learning Unity and Blender 🤷
+
 -------------------------------------------------------------------------------------
 
 REQUIRED LIBRARIES FOR COMPILATION
