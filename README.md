@@ -17,7 +17,7 @@ Basic functionality that I was plannning on implementing was importing meshes, u
 
 - lcglm: C GLM Math library (MIT LICENSE)
 
-    goto https://github.com/recp/cglm.
+    go to https://github.com/recp/cglm.
     install include folder to "include path". (UNIX: usr/include), (Windows: wherever mingw32/TDM-GCC "/include" folder is located)
     change CMakeLists.txt to "static library" at the top (THIS IS BEING DONE BECAUSE I WAS HAVING MORE TROUBLE WITH DYNAMIC LINKED LIBRARIES)
     make "build" directory in CGLM folder
