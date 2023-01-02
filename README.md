@@ -10,12 +10,12 @@ Basic functionality that I was plannning on implementing was importing meshes, u
 
 ## REQUIRED LIBRARIES FOR COMPILATION
 
--lopengl32: should exist on your system by default.
--log.c: INCLUDED IN PROJECT, RENAMED TO GLlog.c and GLlog.h (https://github.com/rxi/log.c) (MIT LICENSE)
+- lopengl32: should exist on your system by default.
+- log.c: INCLUDED IN PROJECT, RENAMED TO GLlog.c and GLlog.h (https://github.com/rxi/log.c) (MIT LICENSE)
 
--lglfw3 (libglfw3.a): look up compiling glfw using cmake
+- lglfw3 (libglfw3.a): look up compiling glfw using cmake
 
--lcglm: C GLM Math library (MIT LICENSE)
+- lcglm: C GLM Math library (MIT LICENSE)
 
     goto https://github.com/recp/cglm.
     install include folder to "include path". (UNIX: usr/include), (Windows: wherever mingw32/TDM-GCC "/include" folder is located)
@@ -30,7 +30,7 @@ Basic functionality that I was plannning on implementing was importing meshes, u
     this should create a static library file "libcglm.a" in "/build"
     put static library file in "library path" of system, or configure makefile to check "/bin" for static library
 
--lglad (libglad.a): 
+- lglad (libglad.a): 
     
     goto https://glad.dav1d.de/ and generate loader with these specs
     
