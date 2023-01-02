@@ -53,4 +53,4 @@ Basic functionality that I was plannning on implementing was importing meshes, u
     Copy `libglad.a` into your compiler's "library path" destination. (UNIX: usr/lib), (Windows: wherever mingw32/TDM-GCC "/lib" folder is located)
 
 
-- Libraries can also be linked using the "-L/libpath" flag to point to a folder that contains the libraries
+Libraries can also be linked using the "-L/libpath" flag to point to a folder that contains the libraries
