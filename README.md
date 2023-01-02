@@ -44,10 +44,9 @@ Basic functionality that I was plannning on implementing was importing meshes, u
 
         Paste both folders in "include" into your compiler's "include path" destination. (UNIX: usr/include), (Windows: wherever mingw32/TDM-GCC "/include" folder is located)
         Move "glad.c" to directory out of zip.
-        Travel to "glad.c" and execute the command "clang -c glad.c" (it does not have to be clang, it can be any compiler). This should make a "glad.o" file in the same directory.
-        Within the same directory, execute the command "ar rcs libglad.a glad.o" to create a statically linked library "libglad.a" within the same directory.
-        Copy "libglad.a" into your compiler's "library path" destination. (UNIX: usr/lib), (Windows: wherever mingw32/TDM-GCC "/lib" folder is located)
-
+        Execute the command `clang -c glad.c` (it does not have to be clang, it can be any compiler). This should make a `glad.o` file in the same directory.
+        Within the same directory, execute the command `ar rcs libglad.a glad.o` to create a statically linked library `libglad.a` within the same directory.
+        Copy `libglad.a` into your compiler's "library path" destination. (UNIX: usr/lib), (Windows: wherever mingw32/TDM-GCC "/lib" folder is located)
 
 
 - Libraries can also be linked using the "-L/libpath" flag to point to a folder that contains the libraries
