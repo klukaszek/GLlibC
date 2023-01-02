@@ -4,9 +4,13 @@ Abandoned for now but I might return to working on this project if I find some i
 
 ## Premise
 
-The original idea for this project was to create a library that could be used to easily create any small 2D or 3D games without having to use Unreal or Unity.
+The original idea for this project was to create a library that could be used to easily create any small 2D or 3D games without having to use Unreal, Unity or Godot.
 
 Basic functionality that I was plannning on implementing was importing meshes, using GLSL/HLSL shaders, default keyboard and xinput support, and audio.
+
+I would also like to properly document the library and host the documentation on a site so that anyone could pick it up and learn.
+
+Once the library is complete, the goal is to have a library that can be used on almost any device without having to worry about setting up any dependencies, perfect for anyone interested in learning game development outside of the 3 popular engines.
 
 ## REQUIRED LIBRARIES FOR COMPILATION
 
