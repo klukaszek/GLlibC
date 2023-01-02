@@ -1,8 +1,14 @@
-Deprecated for now but I might return to working on this project if I find some inspiration, for now I'm just learning Unity and Blender 🤷
+## Notice
 
--------------------------------------------------------------------------------------
+Abandoned for now but I might return to working on this project if I find some inspiration, at the moment I'm just learning modelling and more in Blender 🤷
 
-REQUIRED LIBRARIES FOR COMPILATION
+## Premise
+
+The original idea for this project was to create a library that could be used to easily create any small 2D or 3D games without having to use Unreal or Unity.
+
+Basic functionality that I was plannning on implementing was importing meshes, using GLSL/HLSL shaders, default keyboard and xinput support, and audio.
+
+## REQUIRED LIBRARIES FOR COMPILATION
 
 -lopengl32: should exist on your system by default.
 -log.c: INCLUDED IN PROJECT, RENAMED TO GLlog.c and GLlog.h (https://github.com/rxi/log.c) (MIT LICENSE)
